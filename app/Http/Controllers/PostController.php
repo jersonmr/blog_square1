@@ -3,14 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
-class PostsController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -18,20 +22,20 @@ class PostsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new post.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -42,7 +46,7 @@ class PostsController extends Controller
      * Display the specified resource.
      *
      * @param Post $post
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(Post $post)
     {
@@ -53,7 +57,7 @@ class PostsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Post $post
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(Post $post)
     {
@@ -65,7 +69,7 @@ class PostsController extends Controller
      *
      * @param Request $request
      * @param Post $post
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(Request $request, Post $post)
     {
@@ -76,7 +80,7 @@ class PostsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Post $post
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy(Post $post)
     {

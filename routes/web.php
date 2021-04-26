@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,8 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])
+Route::get('/', [HomeController::class, 'index'])
     ->name('home');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('posts/create', [\App\Http\Controllers\PostController::class, 'create'])
+        ->name('posts.create');
+
+    Route::post('posts', [\App\Http\Controllers\PostController::class, 'store'])
+        ->name('posts.store');
+
+//    Route::resource('posts', \App\Http\Controllers\PostController::class);
+});
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
