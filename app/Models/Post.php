@@ -17,6 +17,15 @@ class Post extends Model
 
     protected $casts = ['publication_date' => 'datetime:Y-m-d'];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function (Post $model) {
+            $model->publication_date = now();
+        });
+    }
+
     public function User()
     {
         return $this->belongsTo(User::class);

@@ -35,11 +35,21 @@ class PostController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => ['required'],
+            'description' => ['required']
+        ]);
+
+        $data = $request->only(['title', 'description']);
+
+        auth()->user()->posts()->create($data);
+
+        return redirect()->route('dashboard')
+            ->with(['message' => __('Post created')]);
     }
 
     /**

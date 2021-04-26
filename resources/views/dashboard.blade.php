@@ -6,25 +6,60 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 lg:py-6">
-            <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
-                <div class="grid grid-cols-1 md:grid-cols-2">
-                    @foreach($posts as $post)
-                        <div class="p-6">
-                            <h4 class="text-lg leading-7 font-semibold">
-                                <a href="https://laravel.com/docs" class="underline text-gray-600 dark:text-white">{{ $post->title }}</a>
-                            </h4>
-                            <p class="mt-2 mb-4 text-gray-500 dark:text-gray-700 text-sm">
-                                {{ $post->description }}
-                            </p>
-                            <time class="text-xs text-gray-700 flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-2 text-red-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                </svg>
-                                {{ $post->publication_date->format('Y-m-d') }}
-                            </time>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:py-6">
+            <div class="flex flex-col">
+
+                <x-alert :message="session('message')" class="mb-4"></x-alert>
+
+                <div class="self-end mb-4">
+                    <x-link-btn :href="route('posts.create')">{{ __('Create a new post') }}</x-link-btn>
+                </div>
+                <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col"
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        {{ __('Title') }}
+                                    </th>
+                                    <th scope="col"
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        {{ __('Description') }}
+                                    </th>
+                                    <th scope="col"
+                                        class="whitespace-nowrap px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        {{ __('Publication date') }}
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                @foreach($posts as $post)
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-normal">
+                                            <div class="text-sm font-medium text-gray-900">
+                                                {{ $post->title }}
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-normal">
+                                            <div class="text-sm text-gray-500">{{ $post->description }}</div>
+                                        </td>
+                                        <td class="flex items-center px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 class="h-3.5 w-3.5 mr-2 text-red-800" fill="none" viewBox="0 0 24 24"
+                                                 stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                            </svg>
+                                            {{ $post->publication_date->format('Y-m-d') }}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
                         </div>
-                    @endforeach
+                    </div>
                 </div>
             </div>
         </div>

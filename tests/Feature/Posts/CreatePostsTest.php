@@ -43,4 +43,63 @@ class CreatePostsTest extends TestCase
             ->assertStatus(200)
             ->assertViewIs('posts.create');
     }
+
+    /** @test */
+    public function authenticated_users_can_create_posts()
+    {
+        $user = User::factory()->create();
+
+        $post = [
+            'title' => 'Example post',
+            'description' => 'This is an example post'
+        ];
+
+        $this->actingAs($user)
+            ->post(route('posts.store'), $post)
+            ->assertStatus(302)
+            ->assertRedirect(route('dashboard'));
+
+        $this->assertDatabaseHas('posts', [
+            'title' => 'Example post',
+            'description' => 'This is an example post'
+        ]);
+    }
+
+    /** @test */
+    public function the_post_title_is_required()
+    {
+        $user = User::factory()->create();
+
+        $post = [
+            'title' => '',
+            'description' => 'This is an example post'
+        ];
+
+        $this->actingAs($user)
+            ->post(route('posts.store'), $post)
+            ->assertSessionHasErrors(['title' => __('validation.required', ['attribute' => 'title'])]);
+
+        $this->assertDatabaseMissing('posts', [
+            'description' => 'This is an example post'
+        ]);
+    }
+
+    /** @test */
+    public function the_post_description_is_required()
+    {
+        $user = User::factory()->create();
+
+        $post = [
+            'title' => 'Example post',
+            'description' => ''
+        ];
+
+        $this->actingAs($user)
+            ->post(route('posts.store'), $post)->ray()
+            ->assertSessionHasErrors(['description' => __('validation.required', ['attribute' => 'description'])]);
+
+        $this->assertDatabaseMissing('posts', [
+            'title' => 'Example post',
+        ]);
+    }
 }
