@@ -20,7 +20,7 @@
 
                         <div class="mt-4">
                             <x-label for="description" :value="__('Description')" />
-                            <textarea class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="description" id="description" rows="10" value="{{ old('description') }}" required></textarea>
+                            <textarea class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="description" id="description" rows="10" required>{{ old('description') }}</textarea>
                         </div>
 
                         <div class="mt-4">
