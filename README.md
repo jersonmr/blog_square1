@@ -1,5 +1,7 @@
 # Blog Square 1
 ---
+[TOC]
+
 This is a project done with Laravel framework and Tailwindcss framework using both technologies to get a result fit to the necessities.
 
 Also, for this develop was used the official login package provided by Laravel called [Laravel Breeze](https://laravel.com/docs/8.x/starter-kits#laravel-breeze), this includes all the scaffolding to do the login and register process.
@@ -22,7 +24,7 @@ Open the terminal and located inside the project folder, follow the next instruc
 7. After that, run the command `php artisan serve`
 8. Open the browser and put write in the url search bar `http://127.0.0.1:8000/` to execute the project
 
-### VERY IMPORTANT!
+## Very important!
 To populate the database with the posts from the [API](https://sq1-api-test.herokuapp.com/posts) is necessary open other terminal and run the command `php artisan schedule:work`
 
 For develop purpose, I recommend to change the time of execution of this task from every hour to every minute. To do this, just go to the file `kernel.php` located in `app/Console/Kernel.php` and modify the **line 43** changing the method `hourly()` by the method `everyMinute()`.
@@ -35,5 +37,11 @@ This command execute a request to the API and save the records got in our databa
 
 You can follow the doc provided by Laravel to do it.
 [How to config Supervisor](https://laravel.com/docs/8.x/queues#supervisor-configuration)
+
+## Access like admin
+```
+email: admin@mail.test
+password: password
+```
 
 **Done with love ❤**

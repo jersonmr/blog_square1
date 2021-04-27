@@ -36,7 +36,7 @@
             <div class="max-w-6xl py-12 mx-auto sm:px-6 md:px-8 md:py-6">
                 <div class="md:mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
                     <div class="grid grid-cols-1 md:grid-cols-2">
-                        @foreach($posts as $post)
+                        @forelse($posts as $post)
                             <div class="p-6">
                                 <h4 class="text-lg leading-7 font-semibold">
                                     <a href="https://laravel.com/docs" class="underline text-gray-600 dark:text-white">{{ $post->title }}</a>
@@ -51,7 +51,14 @@
                                     {{ $post->publication_date->diffForHumans() }}
                                 </time>
                             </div>
-                        @endforeach
+                        @empty
+                            <div class="px-4 py-6 text-gray-500 col-span-full flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <h1 class="justify-center text-4xl uppercase">{{ __('There is not posts added') }}</h1>
+                            </div>
+                        @endforelse
                     </div>
                 </div>
             </div>
