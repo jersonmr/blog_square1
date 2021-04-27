@@ -13,18 +13,10 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $allowedSorts = ['newest', 'oldest'];
-        $sort = request('publication_date');
-        $direction = $sort == 'newest' ? 'desc' : 'asc';
-
-        if(!is_null($sort) && ! collect($allowedSorts)->contains($sort)) {
-            abort(400, __('Invalid Query Parameter'));
-        }
-
         $posts = Post::query()
             ->select('title', 'description', 'publication_date')
             ->where('user_id', '=', auth()->id())
-            ->orderBy('publication_date', $direction)
+            ->applySort(request('publication_date'))
             ->paginate();
 
         return view('dashboard', compact('posts'));
