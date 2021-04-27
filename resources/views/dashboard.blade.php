@@ -11,9 +11,22 @@
 
                 <x-alert :message="session('message')" class="mb-4"></x-alert>
 
-                <div class="self-end mb-4">
-                    <x-link-btn :href="route('posts.create')">{{ __('Create a new post') }}</x-link-btn>
+                <div class="sm:flex sm:justify-between mb-4 text-center sm:text-left">
+                    <form action="{{ route('dashboard') }}">
+                        <div class="flex items-center justify-center sm:justify-start">
+                            <x-label for="publication_date" :value="__('Sort by')" class="uppercase" />
+                            <select name="publication_date" id="publication_date" class="mx-4 appearance-none outline-none border-0">
+                                <option value="" selected>Select...</option>
+                                <option value="newest">Newest</option>
+                                <option value="oldest">Oldest</option>
+                            </select>
+                            <x-button>Apply</x-button>
+                        </div>
+                    </form>
+
+                    <x-link-btn :href="route('posts.create')" class="mt-4 sm:mt-0">{{ __('Create a new post') }}</x-link-btn>
                 </div>
+
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
@@ -60,6 +73,10 @@
                             </table>
                         </div>
                     </div>
+                </div>
+
+                <div class="my-4">
+                    {{ $posts->links() }}
                 </div>
             </div>
         </div>

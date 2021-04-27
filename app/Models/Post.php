@@ -9,22 +9,13 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'title', 'description'];
+    protected $fillable = ['user_id', 'title', 'description', 'publication_date'];
 
     public $timestamps = false;
 
     const CREATED_AT = 'publication_date';
 
-    protected $casts = ['publication_date' => 'datetime:Y-m-d'];
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function (Post $model) {
-            $model->publication_date = now();
-        });
-    }
+    protected $casts = ['publication_date' => 'datetime'];
 
     public function User()
     {

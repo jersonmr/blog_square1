@@ -51,7 +51,7 @@ class CreatePostsTest extends TestCase
 
         $post = [
             'title' => 'Example post',
-            'description' => 'This is an example post'
+            'description' => 'This is an example post',
         ];
 
         $this->actingAs($user)

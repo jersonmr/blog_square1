@@ -2,8 +2,10 @@
 
 namespace App\Console;
 
+use App\Models\User;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Http;
 
 class Kernel extends ConsoleKernel
 {
@@ -24,7 +26,21 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->call(function () {
+            $response = Http::get('https://sq1-api-test.herokuapp.com/posts');
+
+            $admin = User::query()
+                ->where('email', '=', 'admin@mail.test')
+                ->first();
+
+            foreach ($response->json('data') as $post) {
+                $admin->posts()->create([
+                    'title' => $post['title'],
+                    'description' => $post['description'],
+                    'publication_date' => $post['publication_date'],
+                ]);
+            }
+        })->hourly();
     }
 
     /**

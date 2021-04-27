@@ -6,7 +6,7 @@ use App\Models\Post;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function __invoke()
     {
         $posts = Post::query()
             ->select('title', 'description', 'publication_date')

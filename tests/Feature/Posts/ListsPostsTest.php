@@ -45,7 +45,7 @@ class ListsPostsTest extends TestCase
 
         $this->get(route('home'))
             ->assertStatus(200)
-            ->assertSee($posts[0]->publication_date->format('Y-m-d'))
-            ->assertSee($posts[1]->publication_date->format('Y-m-d'));
+            ->assertSee($posts[0]->publication_date->diffForHumans())
+            ->assertSee($posts[1]->publication_date->diffForHumans());
     }
 }
