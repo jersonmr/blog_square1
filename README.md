@@ -1,62 +1,39 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Blog Square 1
+---
+This is a project done with Laravel framework and Tailwindcss framework using both technologies to get a result fit to the necessities.
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Also, for this develop was used the official login package provided by Laravel called [Laravel Breeze](https://laravel.com/docs/8.x/starter-kits#laravel-breeze), this includes all the scaffolding to do the login and register process.
 
-## About Laravel
+## Steps to install the project correctly
+Open the terminal and located inside the project folder, follow the next instructions:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+1. Run the command `composer install`
+2. Run the command `cp .env.example .env` to generate the `.env` file
+3. Run the command `php artisan key:generate` to apply an **APP_KEY** into the `.env` file
+4. Edit the `.env` file and modify with your own setting the vars:
+    * DB_CONNECTION
+    * DB_HOST
+    * DB_PORT
+    * DB_DATABASE
+    * DB_USERNAME
+    * DB_PASSWORD
+5. Once the detabase is configured, locate the terminal in the folder project and run the command `php artisan migrate` to create the tables of the database
+6. Run the command `php artisan db:seed` to create an admin user
+7. After that, run the command `php artisan serve`
+8. Open the browser and put write in the url search bar `http://127.0.0.1:8000/` to execute the project
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### VERY IMPORTANT!
+To populate the database with the posts from the [API](https://sq1-api-test.herokuapp.com/posts) is necessary open other terminal and run the command `php artisan schedule:work`
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+For develop purpose, I recommend to change the time of execution of this task from every hour to every minute. To do this, just go to the file `kernel.php` located in `app/Console/Kernel.php` and modify the **line 43** changing the method `hourly()` by the method `everyMinute()`.
 
-## Learning Laravel
+This way, the database will be populated with new records coming from the API every minute instead every hour.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+This command run every hour a request to this API and save the records got in our database associated to the 'admin' user.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+<u>**Recommendation:**</u> if this project will go to be executed in a production server I recommend install in the server a process watcher like **Supervisor** and configurate the schedule task through this.
 
-## Laravel Sponsors
+You can follow the doc provided by Laravel to do it.
+[How to config Supervisor](https://laravel.com/docs/8.x/queues#supervisor-configuration)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**Done with love ❤**
