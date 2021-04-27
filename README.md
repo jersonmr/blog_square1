@@ -29,7 +29,7 @@ For develop purpose, I recommend to change the time of execution of this task fr
 
 This way, the database will be populated with new records coming from the API every minute instead every hour.
 
-This command run every hour a request to this API and save the records got in our database associated to the 'admin' user.
+This command execute a request to the API and save the records got in our database associated to the 'admin' user.
 
 <u>**Recommendation:**</u> if this project will go to be executed in a production server I recommend install in the server a process watcher like **Supervisor** and configurate the schedule task through this.
 
