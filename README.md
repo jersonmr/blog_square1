@@ -1,6 +1,9 @@
 # Blog Square 1
 ---
-[TOC]
+- [Blog Square 1](#blog-square-1)
+    * [Steps to install the project correctly](#steps-to-install-the-project-correctly)
+    * [Very important](#very-important)
+    * [Access like admin](#access-like-admin)
 
 This is a project done with Laravel framework and Tailwindcss framework using both technologies to get a result fit to the necessities.
 
